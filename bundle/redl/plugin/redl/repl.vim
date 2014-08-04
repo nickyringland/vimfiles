@@ -70,10 +70,21 @@ inoremap <Plug>clj_repl_downhist. <C-O>:call redl#repl#down_history()<CR>
 
 " This creates a new repl in a split
 function! redl#repl#create(namespace)
-  new
+  if !exists('b:redl_spawn_count')
+    let b:redl_spawn_count = 0
+  else
+    let b:redl_spawn_count = b:redl_spawn_count + 1
+  endif
+  let bufname = bufname('%').'.redl.'.b:redl_spawn_count
+  if exists('g:redl_use_vsplit')
+    vnew
+  else
+    new
+  endif
   setlocal buftype=nofile
   setlocal noswapfile
   set filetype=clojure
+  execute ':file '.bufname
   let ns = "'".a:namespace
   let b:repl_id = fireplace#evalparse('(do (in-ns '.ns.') (redl.core/make-repl '.ns.'))')
   let b:repl_namespace = a:namespace
@@ -94,10 +105,11 @@ function! redl#repl#create(namespace)
     nmap <buffer> <silent> I <Plug>clj_repl_Ins.
   endif
   if !hasmapto("<Plug>clj_repl_uphist.", "i")
-    imap <buffer> <silent> <C-Up> <Plug>clj_repl_uphist.
+    imap <silent> <C-Up> <Plug>clj_repl_uphist.
   endif
   if !hasmapto("<Plug>clj_repl_downhist.", "i")
-    imap <buffer> <silent> <C-Down> <Plug>clj_repl_downhist.
+    imap <silent> <C-Down> <Plug>clj_repl_downhist.
+        " Note: <buffer> made the history command not work for some users
   endif
 
   call redl#repl#show_prompt()

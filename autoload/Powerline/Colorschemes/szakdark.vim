@@ -89,7 +89,13 @@ let g:Powerline#Colorschemes#szakdark#colorscheme = Pl#Colorscheme#Init([
 		\ 'i': ['mediumcyan', 'darkestblue'],
 		\ }),
 	\
-	\ Pl#Hi#Segments(['lineinfo'], {
+	\ Pl#Hi#Segments(['sli:sli'], {
+		\ 'n': ['gray2', 'gray10'],
+		\ 'N': ['gray7', 'gray3'],
+		\ 'i': ['darkestcyan', 'mediumcyan'],
+		\ }),
+	\
+	\ Pl#Hi#Segments(['lineinfo', 'sli:sli.line.cur'], {
 		\ 'n': ['gray2', 'gray10', ['bold']],
 		\ 'N': ['gray7', 'gray3', ['bold']],
 		\ 'i': ['darkestcyan', 'mediumcyan', ['bold']],
@@ -100,7 +106,7 @@ let g:Powerline#Colorschemes#szakdark#colorscheme = Pl#Colorscheme#Init([
 		\ 'i': ['brightestorange', 'darkestblue', ['bold']],
 		\ }),
 	\
-	\ Pl#Hi#Segments(['lineinfo.line.tot'], {
+	\ Pl#Hi#Segments(['lineinfo.line.tot', 'sli:sli.line.tot'], {
 		\ 'n': ['gray6'],
 		\ 'N': ['gray7'],
 		\ 'i': ['darkestcyan'],

@@ -3347,6 +3347,10 @@ if g:EnablePowerline
     " Indicate trailing whitespace in file.
     call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
+    " Replace the lineinfo segment with a version that does not have the
+    " line symbol bolded.
+    call Pl#Theme#ReplaceSegment('lineinfo', 'sli:sli')
+
     " Provide short forms of mode names, if a user adds back in the
     " mode_indicator.
     let g:Powerline_mode_n = 'N'
